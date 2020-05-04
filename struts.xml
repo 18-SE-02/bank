@@ -1,0 +1,39 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <package name="customer" extends="struts-default">
+        <action name="login" class="customerAction.LoginAction">
+            <result name="success">/customer/success.jsp</result>
+            <result name="input">/customer/login.jsp</result>
+            <result name="error">/customer/login.jsp</result>
+        </action>
+        <action name="inquire" class="customerAction.InquireAction">
+            <result name="success">/customer/inquireMoney.jsp</result>
+            <result name="input">/customer/success.jsp</result>
+            <result name="error">/customer/success.jsp</result>
+        </action>
+        <action name="forget" class="customerAction.ForgetPasswordAction">
+            <result name="success">/customer/changePassword.jsp</result>
+            <result name="input">/customer/forgetPassword.jsp</result>
+            <result name="error">/customer/forgetPassword.jsp</result>
+        </action>
+        <action name="change" class="customerAction.ChangePasswordAction">
+            <result name="success">/customer/login.jsp</result>
+            <result name="input">/customer/changePassword.jsp</result>
+            <result name="error">/customer/changePassword.jsp</result>
+        </action>
+        <action name="changepwd" class="customerAction.ChangePwdAction">
+            <result name="success">/customer/changePassword.jsp</result>
+            <result name="input">/customer/changePwd.jsp</result>
+            <result name="error">/customer/changePwd.jsp</result>
+        </action>
+        <action name="transfer" class="customerAction.TransferAction">
+            <result name="success">/customer/success.jsp</result>
+            <result name="input">/customer/transfer.jsp</result>
+            <result name="error">/customer/transfer.jsp</result>
+        </action>
+    </package>
+</struts>
