@@ -70,3 +70,44 @@
     </body>
 </html>
 
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <style type="text/css">
+            #ad{
+                width:424px;
+                height: 356px;
+                background:url(广告.png);
+                /*绝对定位放置到浏览器右下角，即使有下拉条时广告弹窗也不会改变位置*/
+                position: fixed;
+                bottom:0px;
+                right: 0px;
+                display: none;
+            }
+        </style>
+        <script type="text/javascript">
+            
+            function init(){
+                setTimeout(showAd,2000)
+            }
+            
+            function showAd(){
+                var ad = document.getElementById("ad");
+                ad.style.display ="block";
+            }
+
+            function closeAd(){
+                var ad = document.getElementById("ad");
+                ad.style.display ="none";
+            }
+            
+        </script>
+        
+    </head>
+    
+    <body onload="init()">
+            <div id="ad">
+                <button onclick="closeAd()">关闭</button>
+            </div>
+    </body>
+</html>
