@@ -88,7 +88,7 @@ public class Loan extends JDialog implements ActionListener{
 			this.dispose();//¹Ø±Õ¶Ô»°¿ò
 		}
 		
-		if(arg0.getSource() == jb1){
+		else if(arg0.getSource() == jb1){
 			   Connection ct = null;
 			   PreparedStatement pstmt = null;
 			   ResultSet rs = null;
