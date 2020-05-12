@@ -148,7 +148,7 @@ public class Deposit extends JDialog implements ActionListener {
             if(number.toCharArray()[i] == ' '){
                 return true;
             }
-        }
+        } 
         return false;
     }
 }
