@@ -1,5 +1,4 @@
-package bankAdmin;
-
+package bankService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,282 +9,165 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+public class Home_page extends JFrame implements ActionListener {
 
-public class Home_page extends JFrame implements ActionListener{
-	//动作事件监听器，实现ActionListener接口
-	
 	JFrame jf = new JFrame();
 	Container container = jf.getContentPane();
-	JButton inquire,add,change,delete,home,out,loan,open,deposit,draw;
-	JPanel jp1,jp2;
-	JLabel  num;
-	JTextField cardNum;
+	JButton home, look, reply, lookNew, lookOld, out, read;
+	JPanel jp1,jp2,jp;
 	JTable table;
-	CustomerModel cm;
+	JLabel word;
+	AdviseModel am;
 	JScrollPane jsp;
-	
-	 //定义连接数据库的变量
-	 Statement stat = null;
-	 PreparedStatement ps;
-	 Connection ct = null;
-	 ResultSet rs = null;
-	
+
+	// 定义连接数据库的变量
+	Statement stat = null;
+	PreparedStatement ps;
+	Connection ct = null;
+	ResultSet rs = null;
+
 	public Home_page() {
-		
-		jf.setTitle("村镇银行管理系统");
-		jf.setVisible(true);//使窗口可视
-		jf.setSize(1200,500);//窗口的大小
+		jf.setTitle("村镇银行客服系统");
+		jf.setVisible(true);// 使窗口可视
+		jf.setSize(1200, 500);// 窗口的大小
 		jf.setLocation(150, 150);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//设置窗口关闭方式
-		
+        jf.setLocationRelativeTo(null);
+		GridLayout layout = new GridLayout(5, 1);	  
+		jp = new JPanel();
+		word = new JLabel("在线客服咨询管理");
+		jp.add(word);
 		jp1 = new JPanel();
-		num = new JLabel("请输入卡号：");
-		cardNum = new JTextField(20);
-		inquire = new JButton("查询");
-		inquire.addActionListener(this);
-		jp1.add(num);
-		jp1.add(cardNum);
-		jp1.add(inquire);
-		
-		
-		jp2 = new JPanel();
-		add = new JButton("添加");
-		add.addActionListener(this);
-		change = new JButton("修改");
-		change.addActionListener(this);
-		delete = new JButton("删除");
-		delete.addActionListener(this);
-		loan = new JButton("贷款");
-		loan.addActionListener(this);
 		home = new JButton("主界面");
 		home.addActionListener(this);
 		out = new JButton("退出系统");
 		out.addActionListener(this);
-		deposit = new JButton("存款");
-		deposit.addActionListener(this);
-		draw = new JButton("取款");
-		draw.addActionListener(this);
-		open = new JButton("开通网银");
-		open.addActionListener(this);
 		
-		jp2.add(add);
-		jp2.add(change);
-		jp2.add(delete);
-		jp2.add(loan);
-		jp2.add(home);
-		jp2.add(out);
-		jp2.add(open);
-		jp2.add(draw);
-		jp2.add(deposit);
 		
-		//创建模型对象
-		cm = new CustomerModel();
-		
-		//初始化
-		table = new JTable(cm);
-		
-		//若表格显示不全设置滚动条
+		jp2	= new JPanel(layout);
+		look = new JButton("查看所有留言");
+		look.addActionListener(this);
+		lookNew = new JButton("查看未读留言");
+		lookNew.addActionListener(this);
+		lookOld = new JButton("查看已读留言");
+		lookOld.addActionListener(this);
+		reply = new JButton("回复留言");
+		reply.addActionListener(this);
+		read = new JButton("标为已读留言");
+		read.addActionListener(this);
+
+		jp1.add(home);
+		jp1.add(out);
+		jp2.add(look);
+		jp2.add(lookNew);
+		jp2.add(lookOld);
+		jp2.add(read);
+		jp2.add(reply);
+
+		// 创建模型对象
+		am = new AdviseModel();
+
+		// 初始化
+		table = new JTable(am);
+
+		// 若表格显示不全设置滚动条
 		jsp = new JScrollPane(table);
 		jf.add(jsp);
-		jf.add(jp1,"North");
-		jf.add(jp2,"South");
-		
+		jf.add(jp, "North");
+		jf.add(jp1, "South");
+		jf.add(jp2, "West");
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-		if(e.getSource() == inquire) { 
-			//因为把对表的数据封装到StuModel中，可以比较简单的完成查询
-			String cardNum = this.cardNum.getText().trim();
-			//写一个sql语句
-			String sql = "select * from customer1 where cardNumber = '"+cardNum+"' ";
-			//构建一个数据模型类，并更新
-			cm = new CustomerModel(sql);
-			//更新jtable
-			table.setModel(cm);
-		}
-		
-		else if(e.getSource() == add) {
-			AddCustomer add = new AddCustomer(this,"添加学生",true);
-			String cardNum= add.cardNumber;
-			String sql = "select * from customer1 where cardNumber = '"+cardNum+"' ";
-			//构建一个数据模型类，并更新
-			cm = new CustomerModel(sql);
-			table.setModel(cm);
-		}
-		
-		else if(e.getSource()==delete) {
-			int rowNum = this.table.getSelectedRow();//getSelectedRow会返回给用户点中的行
-			//如果该用户一行都没有选，就返回-1
-			if(rowNum == -1){
-				//提示
-				JOptionPane.showMessageDialog(this, "请选中一行");
-				return ;
+		if (e.getSource() == out) {
+			int n = JOptionPane.showConfirmDialog(this, "你确定要退出嘛？", "询问", JOptionPane.YES_NO_OPTION);
+			if (n == 0) {
+				System.exit(0);
 			}
-			
-			//得到用户ID
-			String cusCardNum = (String)cm.getValueAt(rowNum, 0);
-			System.out.println("Id： "+cusCardNum);
-			
-			String tip = "你确定要删除卡号为"+ cusCardNum + "的成员嘛？";
-			int n = JOptionPane.showConfirmDialog(this, tip , "询问",JOptionPane.YES_NO_OPTION);
-			if(n==0) {
-			//连接数据库,完成删除任务
-			  try{
-			  //1.加载驱动
-			  Class.forName("com.mysql.jdbc.Driver");
-			  //2.连接数据库
-			  ct = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "root", "root");
-			  System.out.println("连接成功");
-			  ps = ct.prepareStatement("delete from customer1 where cardNumber = ?");
-			  ps.setString(1,cusCardNum);
-			  ps.executeUpdate();
-			  }catch(Exception arg1){
-				  arg1.printStackTrace();
-			  }finally{
-				  try{
-					  if(rs!= null){
-						  rs.close();
-						  rs = null;
+		}
 
-					  }
-					  if(ps!= null){
-						  ps.close();
-						  ps = null;
-					  }
-					  if(ct != null){
-						  ct.close();
-						  ct = null;
-					  }
-				  } catch(Exception arg2){
-					  arg2.printStackTrace();
-				  }
-			  }
-			  cm = new CustomerModel();
-			  //更新jtable
-			  table.setModel(cm);
-			}
+		// 主界面
+		else if (e.getSource() == home) {
+			am = new AdviseModel();
+			table.setModel(am);
 		}
-		
-		//主界面
-		else if(e.getSource() == home) {
-			cm = new CustomerModel();
-			cardNum.setText("");
-			table.setModel(cm);
+
+		// 查看所有留言
+		else if (e.getSource() == look) {
+			String sql = "select * from leavemessage";
+			am = new AdviseModel(sql);
+			table.setModel(am);
 		}
-		
-		//退出
-		else if(e.getSource() == out) {
-			int n = JOptionPane.showConfirmDialog(this,"你确定要退出嘛？", "询问",JOptionPane.YES_NO_OPTION);
-//			JOptionPane.showMessageDialog(null, "你选择了退出", "提示信息",
-//		              JOptionPane.INFORMATION_MESSAGE);
-//			jf.dispose();//关闭添加对话框
-			if(n==0) {
-				System.exit(0); 
-			}
-		}
-		
-		//更改
-		else if(e.getSource() == change) {
-			int rowNum = this.table.getSelectedRow();//getSelectedRow会返回给用户点中的行
-			//如果该用户一行都没有选，就返回-1
-			if(rowNum == -1){
-				//提示
+
+		// 将留言置为已读
+		else if (e.getSource() == read) {
+			int rowNum = this.table.getSelectedRow();// getSelectedRow会返回给用户点中的行
+			// 如果该用户一行都没有选，就返回-1
+			if (rowNum == -1) {
+				// 提示
 				JOptionPane.showMessageDialog(this, "请选中一行");
-				return ;
+				return;
 			}
-			ChangeCustomer changeCustomer = new ChangeCustomer(this, "修改信息", true, cm, rowNum);
-			String cardNum= changeCustomer.cardNumber;
-			String sql = "select * from customer1 where cardNumber = '"+cardNum+"' ";
-			//构建一个数据模型类，并更新
-			cm = new CustomerModel(sql);
-			table.setModel(cm);
-		}
-		
-		else if (e.getSource() == loan) {
-			int rowNum = this.table.getSelectedRow();//getSelectedRow会返回给用户点中的行
-			//如果该用户一行都没有选，就返回-1
-			if(rowNum == -1){
-				//提示
-				JOptionPane.showMessageDialog(this, "请选中一行");
-				return ;
-			}
-			Loan loan1 = new Loan(this, "修改信息", true, cm, rowNum);
-			String cardNum= loan1.cardNumber;
-			String sql = "select * from customer1 where cardNumber = '"+cardNum+"' ";
-			//构建一个数据模型类，并更新
-			cm = new CustomerModel(sql);
-			table.setModel(cm);
-		}
-		
-		//存款
-				else if(e.getSource() == deposit) {
-					int rowNum = this.table.getSelectedRow();//getSelectedRow会返回给用户点中的行
-					//如果该用户一行都没有选，就返回-1
-					if(rowNum == -1){
-						//提示
-						JOptionPane.showMessageDialog(this, "请选择存款用户");
-						return ;
+			String date = (String) am.getValueAt(rowNum, 0);
+			try {
+				// 1.加载驱动
+				Class.forName("com.mysql.jdbc.Driver");
+				// 2.连接数据库
+				ct = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "root", "root");
+				stat = ct.createStatement();// 创建stat对象
+				String sql = "select * from leavemessage where date = '" + date + "' ";
+				rs = stat.executeQuery(sql);// 查询结果
+				while (rs.next()) {
+					if (rs.getInt(4) == 1) {
+						JOptionPane.showMessageDialog(null, "已经查看过该留言", "提示信息", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						stat = null;
+						stat = ct.createStatement();// 创建stat对象
+						String sql1 = "update leavemessage set look= '" + 1 + "' where date= '" + date + "'";
+						stat.executeUpdate(sql1);
+						JOptionPane.showMessageDialog(null, "置为已读成功", "提示信息", JOptionPane.INFORMATION_MESSAGE);
 					}
-					Deposit deposit = new Deposit(this, "存款", true, cm, rowNum);
-					String cardNum=deposit.cardNumber;
-					String sql = "select * from customer1 where cardNumber = '"+cardNum+"' ";
-					//构建一个数据模型类，并更新
-					cm = new CustomerModel(sql);
-					table.setModel(cm);
 				}
-				//取款
-				else if(e.getSource() == draw) {
-					int rowNum = this.table.getSelectedRow();//getSelectedRow会返回给用户点中的行
-					//如果该用户一行都没有选，就返回-1
-					if(rowNum == -1){
-						//提示
-						JOptionPane.showMessageDialog(this, "请选择取款用户");
-						return ;
-					}
-					Draw draw = new Draw(this, "取款", true, cm, rowNum);
-					String cardNum=draw.cardNumber;
-					String sql = "select * from customer1 where cardNumber = '"+cardNum+"' ";
-					//构建一个数据模型类，并更新
-					cm = new CustomerModel(sql);
-					table.setModel(cm);
-				}
-		
-		else if(e.getSource() == open) {
-			int rowNum = this.table.getSelectedRow();//getSelectedRow会返回给用户点中的行
-			//如果该用户一行都没有选，就返回-1
-			if(rowNum == -1){
-				//提示
-				JOptionPane.showMessageDialog(this, "请选中一行");
-				return ;
-			}
-			String CardNumber1 = (String)cm.getValueAt(rowNum, 0);
-			Connection ct = null;
-			   PreparedStatement pstmt = null;
-			   ResultSet rs = null;
-			   Statement stmt = null;
-			try{
-				//1.加载驱动
-			    Class.forName("com.mysql.jdbc.Driver");
-			    System.out.println("加载成功");
-			    //2.连接数据库
-			    ct = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "root", "root");
-			    stmt = ct.createStatement();
-				String sql = "update customer1 set onlineBanking= '" +1+ "' where cardNumber= '" + CardNumber1 + "'";
-				stmt.executeUpdate(sql);
-				JOptionPane.showMessageDialog(null, "开通网银成功", "提示信息",
-						JOptionPane.INFORMATION_MESSAGE);
-			}catch(Exception arg1){
+			} catch (Exception arg1) {
 				arg1.printStackTrace();
 			}
-			String sql = "select * from customer1 where cardNumber = '"+CardNumber1+"' ";
-			//构建一个数据模型类，并更新
-			cm = new CustomerModel(sql);
-			table.setModel(cm);
+			String sql = "select * from leavemessage where date = '" + date + "' ";
+			// 构建一个数据模型类，并更新
+			am = new AdviseModel(sql);
+			table.setModel(am);
 		}
+
+		// 查看已读留言
+		else if (e.getSource() == lookOld) {
+			String sql = "select * from leavemessage where look = '" + 1 + "' ";
+			am = new AdviseModel(sql);
+			table.setModel(am);
+		}
+		
+		// 查看已读留言
+		else if (e.getSource() == lookNew) {
+			String sql = "select * from leavemessage where look = '" + 0 + "' ";
+			am = new AdviseModel(sql);
+			table.setModel(am);
+		}
+		
+		// 回复留言
+		else if (e.getSource() == reply) {
+			int rowNum = this.table.getSelectedRow();// getSelectedRow会返回给用户点中的行
+			// 如果该用户一行都没有选，就返回-1
+			if (rowNum == -1) {
+				// 提示
+				JOptionPane.showMessageDialog(this, "请选中一行");
+				return;
+			}
+			Reply reply = new Reply(this, "修改信息", true, am, rowNum);
+			String date = reply.date;
+			String sql = "select * from leavemessage where date = '" + date + "' ";
+			// 构建一个数据模型类，并更新
+			am = new AdviseModel(sql);
+			table.setModel(am);
+		}
+			
 	}
-	
+
 }
