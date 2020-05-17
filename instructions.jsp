@@ -1,10 +1,3 @@
-<%-- 
-    Document   : instructions
-    Created on : 2020-5-5, 20:08:05
-    Author     : 王师千里不留行
---%>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -14,18 +7,19 @@
         <title><s:text name="网上银行用户须知页"></s:text></title>
         <style>
         #header {
-            background-color:transparent;
-            color:black;
+            background-color:#a47748;
+            color:#ffffff;
             text-align:center;
             padding:5px;
         }       
         </style>
     </head>
+    
     <body>
         <div id="header">
-            <h1>网上银行用户须知</h1>
+            <h1><font family="黑体">·网上银行用户须知·</h1>
         </div>
-        <hr align="center" size="px" width="100%" color="grey">
+        <hr align="center" size="px" width="100%" color="#a47748">
             <br><br><br>
             <table border="0" align="center" frame="border">
                 <tr>
@@ -66,48 +60,13 @@
                     </td>
                 </tr>
             </table>
-        <br><br><br><br>
-    </body>
-</html>
-
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <style type="text/css">
-            #ad{
-                width:424px;
-                height: 356px;
-                background:url(广告.png);
-                /*绝对定位放置到浏览器右下角，即使有下拉条时广告弹窗也不会改变位置*/
-                position: fixed;
-                bottom:0px;
-                right: 0px;
-                display: none;
-            }
-        </style>
-        <script type="text/javascript">
-            
-            function init(){
-                setTimeout(showAd,2000)
-            }
-            
-            function showAd(){
-                var ad = document.getElementById("ad");
-                ad.style.display ="block";
-            }
-
-            function closeAd(){
-                var ad = document.getElementById("ad");
-                ad.style.display ="none";
-            }
-            
-        </script>
-        
-    </head>
-    
-    <body onload="init()">
-            <div id="ad">
-                <button onclick="closeAd()">关闭</button>
-            </div>
+        <br><br>
+        <hr align="center" size="10px" width="100%" color="#a47748">
+        <font color="grey" size="1px" family="黑体"><br>
+            <li><center>网管信箱：ccut@163.com　投稿信箱：ccut@163.com </center></li><br>
+            <li><center>地址：长春市宽城区奋进乡长春工业大学　版权所有：村镇银行存储　网络实名：村镇银行网络服务中心 </center></li><br>
+            <li><center>京ICP备10052455号 京公网安备110102002036号 </center></li>
+            <li><center></center></li>
+        </font>
     </body>
 </html>
