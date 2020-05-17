@@ -20,12 +20,12 @@
             .top div{float:left;}
             .top ul{float:right;}
             .top ul li{float:left;}
-            .top1{border: 1px solid #ffffff;height:100px;width: 20px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/空.png);background-size: 20px 100px;}
-            .top2{border: 1px solid #ffffff;height:100px;width: 650px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/logo.png);background-size: 650px 100px;}
-            .top3{border: 1px solid #ffffff;height:100px;width: 130px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/问题查询.png);background-size: 130px 100px;title:用户须知;}
-            .top4{border: 1px solid #ffffff;height:100px;width: 25px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/空 .png);background-size: 25px 100px;}
-            .top5{border: 1px solid #ffffff;height:100px;width: 130px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/意见.png);background-size: 130px 100px;}
-            .top6{border: 1px solid #ffffff;height:100px;width: 130px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/空.png);background-size: 130px 100px;}
+            .top1{border: 1px solid #ffffff;height:100px;width: 20px;background-image: url(F:/SSH/bank/web/customer/空.png);background-size: 20px 100px;}
+            .top2{border: 1px solid #ffffff;height:100px;width: 650px;background-image: url(F:/SSH/bank/web/customer/logo.png);background-size: 650px 100px;}
+            .top3{border: 1px solid #ffffff;height:100px;width: 130px;background-image: url(F:/SSH/bank/web/customer/问题查询.png);background-size: 130px 100px;title:用户须知;}
+            .top4{border: 1px solid #ffffff;height:100px;width: 25px;background-image: url(F:/SSH/bank/web/customer/空 .png);background-size: 25px 100px;}
+            .top5{border: 1px solid #ffffff;height:100px;width: 130px;background-image: url(F:/SSH/bank/web/customer/意见.png);background-size: 130px 100px;}
+            .top6{border: 1px solid #ffffff;height:100px;width: 130px;background-image: url(F:/SSH/bank/web/customer/空.png);background-size: 130px 100px;}
             .nav{background-color: #a47748;line-height:  60px;}
             .nav ul li{float:left;padding: 0 85px 0 85px;font-size: 24px;font-family: "黑体";}
             .nav a:link{color: #ffffff;}
@@ -34,11 +34,11 @@
             .nav a:active{color:yellow;}
             .sub ul{margin: 7px auto;}
             .main{border: 1px solid #ffffff;}
-            .main2{position: absolute;bottom: 45px;left: 79px;border: 1px solid #ffffff;height:298px;width: 470px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/表格背景图.png);background-size: 470px 298px;}
-            .main1{border: 1px solid #ffffff;height:199px;width: 470px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/余额查询窗口.png);background-size: 470px 199px;}
+            .main2{position: absolute;bottom: -85px;left: 1px;border: 1px solid #ffffff;height:298px;width: 470px;background-image: url(F:/SSH/bank/web/customer/表格背景图.png);background-size: 470px 298px;}
+            .main1{border: 1px solid #ffffff;height:199px;width: 470px;background-image: url(F:/SSH/bank/web/customer/余额查询窗口.png);background-size: 470px 199px;}
             .work{float: left;}
             .news{float: right;}
-            .news{height:500px;width: 876px;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/新闻网黑.png);background-size: 876px 500px;}
+            .news{height:500px;width: 876px;background-image: url(F:/SSH/bank/web/customer/新闻网黑.png);background-size: 876px 500px;}
             .foot{border: 1px solid #ffffff; width: 1358px;}
             .link{background-color: #cccccc;height: 53px;}
             .link a:link{color: #63a3c8;}
@@ -181,4 +181,46 @@
                     
     </body>
     
+</html>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <style type="text/css">
+            #ad{
+                width:335px;
+                height: 290px;
+                background:url(广告.png);
+                /*绝对定位放置到浏览器右下角，即使有下拉条时广告弹窗也不会改变位置*/
+                position: fixed;
+                bottom:0px;
+                right: 0px;
+                display: none;
+            }
+        </style>
+        <script type="text/javascript">
+            
+            function init(){
+                setTimeout(showAd,2000)
+            }
+            
+            function showAd(){
+                var ad = document.getElementById("ad");
+                ad.style.display ="block";
+            }
+
+            function closeAd(){
+                var ad = document.getElementById("ad");
+                ad.style.display ="none";
+            }
+            
+        </script>
+        
+    </head>
+    
+    <body onload="init()">
+            <div id="ad">
+                <button onclick="closeAd()">关闭</button>
+            </div>
+    </body>
 </html>
