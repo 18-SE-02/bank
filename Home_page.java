@@ -151,6 +151,7 @@ public class Home_page extends JFrame implements ActionListener {
 					ps = ct.prepareStatement("delete from customer1 where cardNumber = ?");
 					ps.setString(1, cusCardNum);
 					ps.executeUpdate();
+					JOptionPane.showMessageDialog(null, "已成功删除卡号为"+cusCardNum+"的用户", "提示信息", JOptionPane.INFORMATION_MESSAGE);
 				} catch (Exception arg1) {
 					arg1.printStackTrace();
 				} finally {
