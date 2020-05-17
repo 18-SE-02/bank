@@ -30,16 +30,15 @@ public class Home_page extends JFrame implements ActionListener {
 
 	public Home_page() {
 
-		jf.setTitle("村镇银行管理系统");
+		jf.setTitle("村镇银行柜台系统");
 		jf.setVisible(true);// 使窗口可视
 		jf.setSize(1200, 500);// 窗口的大小
 		jf.setLocation(150, 150);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//设置窗口关闭方式
         jf.setLocationRelativeTo(null);
 
 		GridLayout layout1 = new GridLayout(8, 1);		
-		
+		GridLayout layout2 = new GridLayout(8, 1);			
 		jp1 = new JPanel();
 		num = new JLabel("请输入卡号：");
 		cardNum = new JTextField(20);
@@ -92,6 +91,7 @@ public class Home_page extends JFrame implements ActionListener {
 
 		// 初始化
 		table = new JTable(cm);
+		this.setWidth();
 
 		// 若表格显示不全设置滚动条
 		jsp = new JScrollPane(table);
@@ -99,7 +99,7 @@ public class Home_page extends JFrame implements ActionListener {
 		jf.add(jp1, "North");
 		jf.add(jp2, "South");
 		jf.add(jp3, "West");
-
+	
 	}
 
 	@Override
@@ -115,6 +115,7 @@ public class Home_page extends JFrame implements ActionListener {
 			cm = new CustomerModel(sql);
 			// 更新jtable
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		else if (e.getSource() == add) {
@@ -124,6 +125,7 @@ public class Home_page extends JFrame implements ActionListener {
 			// 构建一个数据模型类，并更新
 			cm = new CustomerModel(sql);
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		else if (e.getSource() == delete) {
@@ -173,6 +175,7 @@ public class Home_page extends JFrame implements ActionListener {
 				cm = new CustomerModel();
 				// 更新jtable
 				table.setModel(cm);
+				this.setWidth();
 			}
 		}
 
@@ -181,6 +184,7 @@ public class Home_page extends JFrame implements ActionListener {
 			cm = new CustomerModel();
 			cardNum.setText("");
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		// 退出
@@ -206,6 +210,7 @@ public class Home_page extends JFrame implements ActionListener {
 			// 构建一个数据模型类，并更新
 			cm = new CustomerModel(sql);
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		else if (e.getSource() == loan) {
@@ -222,6 +227,7 @@ public class Home_page extends JFrame implements ActionListener {
 			// 构建一个数据模型类，并更新
 			cm = new CustomerModel(sql);
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		// 存款
@@ -239,6 +245,7 @@ public class Home_page extends JFrame implements ActionListener {
 			// 构建一个数据模型类，并更新
 			cm = new CustomerModel(sql);
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		// 取款
@@ -256,6 +263,7 @@ public class Home_page extends JFrame implements ActionListener {
 			// 构建一个数据模型类，并更新
 			cm = new CustomerModel(sql);
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		else if (e.getSource() == open) {
@@ -287,6 +295,7 @@ public class Home_page extends JFrame implements ActionListener {
 			// 构建一个数据模型类，并更新
 			cm = new CustomerModel(sql);
 			table.setModel(cm);
+			this.setWidth();
 		}
 
 		// 还款
@@ -304,6 +313,22 @@ public class Home_page extends JFrame implements ActionListener {
 			// 构建一个数据模型类，并更新
 			cm = new CustomerModel(sql);
 			table.setModel(cm);
+			this.setWidth();
+		}
+	}
+	
+	public void setWidth() {
+		int columncount = this.table.getColumnCount();
+		for (int i = 0; i < columncount; i++) {
+			if (i == 0 || i == 5 || i == 6) {
+				this.table.getColumnModel().getColumn(i).setPreferredWidth(180);
+			} else if (i == 1 ) {
+				this.table.getColumnModel().getColumn(i).setPreferredWidth(50);
+			} else if (i == 2 || i == 3|| i == 8) {
+				this.table.getColumnModel().getColumn(i).setPreferredWidth(150);
+			} else {
+				this.table.getColumnModel().getColumn(i).setPreferredWidth(100);
+			}
 		}
 	}
 
