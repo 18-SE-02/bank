@@ -1,9 +1,3 @@
-<%-- 
-    Document   : transfer
-    Created on : 2020-5-3, 22:05:16
-    Author     : Administrator
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
@@ -41,33 +35,52 @@
                 }
             }
         </script>
+        
+        <style type="text/css">
+        
+        .sum{border:1px solid #ffffff;height:650px;width: 800px;margin: 0 auto;background-image: url(C:/Users/Lenovo/Desktop/bank/web/customer/转账.png);background-size: 100% 100%;}
+        .sub ul{margin: 7px auto;}
+        .blank{border:1px solid #ffffff;height:200px;width: 800px;margin: 0 auto;}
+        
+        </style>
     </head>
-    <body style="background:url(F:/SSH/bank/web/customer/bgground.jpg);background-size: 100% 100%;background-attachment: fixed">
-        <div id="header">
-            <h1>村镇银行网络服务中心-转账服务</h1>
+    <body>
+        <div class="sum">
+            <div class="blank"></div>
+        <div class="sub">
+            <marquee behavior="scoll" loop="infinite" align="middle" scrooldelay="30px" width="800px" height="30px"  hspace="5px" wspace="5px">
+                        <ul>
+                            <font color="#7b1e1e" family="楷体">您正在进行转账业务，请认真核对所填信息！</font>
+                        </ul>
+                </marquee>
         </div>
         <s:form action="transfer" method="post" name="form">
-            <br><br><br>
-             <table border="1" align="center">
+            <br><br>
+             <table border="2" align="center">
                   <tr>
-                    <s:textfield name="idNumber1" label="请输入您的身份证号码"/>
+                    <s:textfield name="idNumber1" label="请输入您的身份证号码" size="20px" />
                 </tr>
+                <tr></tr>
                 <tr>
-                    <s:textfield name="idNumber2" label="请输入您要转入账户的身份证号码"/>
+                    <s:textfield name="idNumber2" label="请输入您要转入账户的身份证号码" size="20px"/>
                 </tr>
+                <tr></tr>
                 <tr>
-                    <s:textfield name="money" label="请输入您要转账的金额"/>
+                    <s:textfield name="money" label="请输入您要转账的金额" size="20px"/>
                 </tr>
+                <tr></tr>
                 <tr>
-                     <s:password name="password" label="请再次输入密码"/>
+                     <s:password name="password" label="请再次输入密码" size="40px"/>
                 </tr>
+                <tr></tr><tr></tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="button" onClick="doSubmit()" value="确定"/>
+                        <input type="button" onClick="doSubmit()" value="确定"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="reset" value="清空"/>
                     </td>
                 </tr>
             </table>
         </s:form>
+        </div>   
     </body>
 </html>
